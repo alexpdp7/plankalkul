@@ -91,6 +91,9 @@ fn test() {
     test_expr("1-(2+3)");
     test_expr_is("1-2+3", "(1-2)+3");
     test_expr("-(1+1)");
+    test_expr("10/5/2");
+    test_expr("10/(5/2)");
+    test_expr_is("10/5/2", "(10/5)/2");
 }
 
 #[cfg(test)]

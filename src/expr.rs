@@ -45,8 +45,8 @@ impl std::fmt::Display for Expr {
                     _ => op1.to_string(),
                 },
                 match **op2 {
-                    Expr::Add { .. } | Expr::Sub { .. } => format!("({})", op2.to_string()),
-                    _ => op2.to_string(),
+                    Expr::Number { .. } => op2.to_string(),
+                    _ => format!("({})", op2.to_string()),
                 },
             ),
         }
