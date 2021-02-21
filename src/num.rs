@@ -32,7 +32,7 @@ impl std::ops::Add for Number {
 
     fn add(self, other: Self) -> Self {
         Self {
-            number: self.number + other.number
+            number: self.number + other.number,
         }
     }
 }
@@ -42,7 +42,7 @@ impl std::ops::Sub for Number {
 
     fn sub(self, other: Self) -> Self {
         Self {
-            number: self.number - other.number
+            number: self.number - other.number,
         }
     }
 }
@@ -52,7 +52,7 @@ impl std::ops::Mul for Number {
 
     fn mul(self, other: Self) -> Self {
         Self {
-            number: self.number * other.number
+            number: self.number * other.number,
         }
     }
 }
@@ -62,7 +62,7 @@ impl std::ops::Div for Number {
 
     fn div(self, other: Self) -> Self {
         Self {
-            number: self.number / other.number
+            number: self.number / other.number,
         }
     }
 }
