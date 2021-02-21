@@ -21,8 +21,8 @@ pub fn build_number(integer: &str, decimal: &str) -> Number {
     }
 }
 
-impl std::string::ToString for Number {
-    fn to_string(&self) -> String {
-        format!("{}", self.number)
+impl std::fmt::Display for Number {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.number)
     }
 }
