@@ -26,3 +26,43 @@ impl std::fmt::Display for Number {
         write!(f, "{}", self.number)
     }
 }
+
+impl std::ops::Add for Number {
+    type Output = Self;
+
+    fn add(self, other: Self) -> Self {
+        Self {
+            number: self.number + other.number
+        }
+    }
+}
+
+impl std::ops::Sub for Number {
+    type Output = Self;
+
+    fn sub(self, other: Self) -> Self {
+        Self {
+            number: self.number - other.number
+        }
+    }
+}
+
+impl std::ops::Mul for Number {
+    type Output = Self;
+
+    fn mul(self, other: Self) -> Self {
+        Self {
+            number: self.number * other.number
+        }
+    }
+}
+
+impl std::ops::Div for Number {
+    type Output = Self;
+
+    fn div(self, other: Self) -> Self {
+        Self {
+            number: self.number / other.number
+        }
+    }
+}
