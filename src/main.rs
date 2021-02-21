@@ -1,5 +1,6 @@
-use plankalkul::num_parse;
+use plankalkul::expr_parse;
+use std::env::args;
 
 fn main() {
-    println!("{:?}", num_parse::number("123.45"));
+    println!("{:?}", expr_parse::expr(args().nth(1).unwrap().as_str()));
 }
