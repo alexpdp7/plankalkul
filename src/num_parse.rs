@@ -1,13 +1,16 @@
 extern crate nom;
-use nom::character::complete::{char, digit1};
-use nom::{char, opt, IResult};
+use nom::{
+    character::complete::{char, digit1},
+    combinator::opt,
+    IResult,
+};
 
 use crate::num::{build_number, Number};
 
 pub fn number(input: &str) -> IResult<&str, Number> {
-    let (input, sign) = opt!(input, char!('-'))?;
+    let (input, sign) = opt(char('-'))(input)?;
     let (input, integer) = digit1(input)?;
-    let (input, decimal) = opt!(input, decimal_part)?;
+    let (input, decimal) = opt(decimal_part)(input)?;
     let integer = match sign.is_some() {
         true => format!("-{}", integer),
         false => integer.to_string(),
