@@ -63,3 +63,35 @@ fn expr2_number(input: &str) -> IResult<&str, Expr> {
 fn expr2_paren(input: &str) -> IResult<&str, Expr> {
     delimited(char('('), expr, char(')'))(input)
 }
+#[test]
+fn test() {
+    test_expr("1");
+    test_expr_is("1", "1.0");
+    test_expr_is("11/10", "1.1");
+    test_expr("-1");
+    test_expr_is("-1", "-1.0");
+    test_expr_is("-11/10", "-1.1");
+    test_expr("1+1");
+    test_expr("1-1");
+    test_expr("1*1");
+    test_expr("1/1");
+    test_expr("1+1+1");
+    test_expr("1*1*1");
+    test_expr("1+1*1");
+    test_expr("(1+1)*1");
+    test_expr_is("1+1*1", "1+(1*1)");
+}
+
+#[cfg(test)]
+fn test_expr(s: &str) {
+    let (rest, expr) = expr(s).unwrap();
+    assert_eq!("", rest);
+    assert_eq!(s, expr.to_string());
+}
+
+#[cfg(test)]
+fn test_expr_is(exp: &str, s: &str) {
+    let (rest, expr) = expr(s).unwrap();
+    assert_eq!("", rest);
+    assert_eq!(exp, expr.to_string());
+}
