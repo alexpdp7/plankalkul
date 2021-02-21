@@ -2,7 +2,7 @@ use std::str::FromStr;
 
 use num::rational::BigRational;
 
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct Number {
     number: BigRational,
 }
@@ -18,5 +18,11 @@ pub fn build_number(integer: &str, decimal: &str) -> Number {
                 .collect::<String>()
         ))
         .unwrap(),
+    }
+}
+
+impl std::fmt::Display for Number {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.number)
     }
 }
