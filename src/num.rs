@@ -66,3 +66,13 @@ impl std::ops::Div for Number {
         }
     }
 }
+
+impl std::ops::Neg for Number {
+    type Output = Self;
+
+    fn neg(self) -> Self {
+        Self {
+            number: -self.number,
+        }
+    }
+}

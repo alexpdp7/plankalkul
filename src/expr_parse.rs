@@ -52,7 +52,7 @@ fn expr1_second_arm(input: &str) -> IResult<&str, (char, Expr)> {
 }
 
 fn expr2(input: &str) -> IResult<&str, Expr> {
-    alt((expr2_number, expr2_paren))(input)
+    alt((expr2_number, expr2_paren, expr2_negate))(input)
 }
 
 fn expr2_number(input: &str) -> IResult<&str, Expr> {
@@ -63,6 +63,13 @@ fn expr2_number(input: &str) -> IResult<&str, Expr> {
 fn expr2_paren(input: &str) -> IResult<&str, Expr> {
     delimited(char('('), expr, char(')'))(input)
 }
+
+fn expr2_negate(input: &str) -> IResult<&str, Expr> {
+    let (input, _) = char('-')(input)?;
+    let (input, expr) = expr(input)?;
+    Ok((input, Expr::Negate { op: Box::new(expr) }))
+}
+
 #[test]
 fn test() {
     test_expr("1");
@@ -83,6 +90,7 @@ fn test() {
     test_expr("1-2+3");
     test_expr("1-(2+3)");
     test_expr_is("1-2+3", "(1-2)+3");
+    test_expr("-(1+1)");
 }
 
 #[cfg(test)]

@@ -3,6 +3,7 @@ use crate::num::Number;
 #[derive(Clone, Debug, PartialEq)]
 pub enum Expr {
     Number { number: Number },
+    Negate { op: Box<Expr> },
     Add { op1: Box<Expr>, op2: Box<Expr> },
     Sub { op1: Box<Expr>, op2: Box<Expr> },
     Mul { op1: Box<Expr>, op2: Box<Expr> },
@@ -13,6 +14,7 @@ impl std::fmt::Display for Expr {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Expr::Number { number } => write!(f, "{}", number),
+            Expr::Negate { op } => write!(f, "-({})", op),
             Expr::Add { op1, op2 } => write!(f, "{}+{}", op1, op2),
             Expr::Sub { op1, op2 } => write!(
                 f,
