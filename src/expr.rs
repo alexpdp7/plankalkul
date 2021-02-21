@@ -14,7 +14,15 @@ impl std::fmt::Display for Expr {
         match self {
             Expr::Number { number } => write!(f, "{}", number),
             Expr::Add { op1, op2 } => write!(f, "{}+{}", op1, op2),
-            Expr::Sub { op1, op2 } => write!(f, "{}-{}", op1, op2),
+            Expr::Sub { op1, op2 } => write!(
+                f,
+                "{}-{}",
+                op1,
+                match **op2 {
+                    Expr::Add { .. } => format!("({})", op2),
+                    _ => op2.to_string(),
+                }
+            ),
             Expr::Mul { op1, op2 } => write!(
                 f,
                 "{}*{}",
