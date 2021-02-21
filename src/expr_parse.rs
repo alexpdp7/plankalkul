@@ -47,7 +47,7 @@ fn expr1(input: &str) -> IResult<&str, Expr> {
 
 fn expr1_second_arm(input: &str) -> IResult<&str, (char, Expr)> {
     let (input, op) = one_of("*/")(input)?;
-    let (input, op2) = expr1(input)?;
+    let (input, op2) = expr2(input)?;
     Ok((input, (op, op2)))
 }
 
