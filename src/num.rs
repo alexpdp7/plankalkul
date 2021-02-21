@@ -20,3 +20,9 @@ pub fn build_number(integer: &str, decimal: &str) -> Number {
         .unwrap(),
     }
 }
+
+impl std::string::ToString for Number {
+    fn to_string(&self) -> String {
+        format!("{}", self.number)
+    }
+}
