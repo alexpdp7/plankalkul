@@ -2,7 +2,7 @@ use std::str::FromStr;
 
 use num::rational::BigRational;
 
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct Number {
     number: BigRational,
 }
