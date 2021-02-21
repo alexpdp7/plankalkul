@@ -80,6 +80,9 @@ fn test() {
     test_expr("1+1*1");
     test_expr("(1+1)*1");
     test_expr_is("1+1*1", "1+(1*1)");
+    test_expr("1-2+3");
+    test_expr("1-(2+3)");
+    test_expr_is("1-2+3", "(1-2)+3");
 }
 
 #[cfg(test)]
