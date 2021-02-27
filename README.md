@@ -1,4 +1,20 @@
-# Build PWA
+# Introduction
+
+This repository contains Plankalkul.
+Plankalkul consists of:
+
+* A Nom-based mathematical expression parser
+* A mathematical expression evaluator using the `BigRational` type from the num crate.
+
+The additional `plankalkul-pwa` contains a PWA implemented using Yew.
+
+`plankalkul-pwa` has a public deployment at https://alexpdp7.github.io/plankalkul/
+
+## Hacking the PWA
+
+The implementation is based on https://github.com/fkohlgrueber/yew-pwa-minimal
+
+### Building
 
 The script `build-pwa` builds the PWA to `target/pwa/`.
 
@@ -10,7 +26,7 @@ To build using a pre-built Docker image with build dependencies:
 $ docker run -it --rm -v $(pwd):/app -w /app alexpdp7/rust-wasm-pack-rollup ./build-pwa
 ```
 
-# Test PWA
+### Testing
 
 This will not work as a PWA, just as a plain PWA, because PWAs must be served with https.
 
