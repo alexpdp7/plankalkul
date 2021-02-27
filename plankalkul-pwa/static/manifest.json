@@ -1,6 +1,6 @@
 {
-    "name": "Yew Progressive Web App",
-    "short_name": "Yew PWA",
+    "name": "plankalkul",
+    "short_name": "plankalkul",
     "icons": [{
       "src": "./icon-256.png",
         "sizes": "256x256",
