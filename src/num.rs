@@ -2,6 +2,8 @@ use std::str::FromStr;
 
 use num::rational::BigRational;
 
+use crate::num_decimal::to_decimal;
+
 #[derive(Clone, Debug, PartialEq)]
 pub struct Number {
     number: BigRational,
@@ -18,6 +20,12 @@ pub fn build_number(integer: &str, decimal: &str) -> Number {
                 .collect::<String>()
         ))
         .unwrap(),
+    }
+}
+
+impl Number {
+    pub fn to_decimal_periodic(&self) -> String {
+        format!("{:?}", to_decimal(self.number.clone()))
     }
 }
 
