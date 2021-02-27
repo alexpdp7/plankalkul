@@ -48,7 +48,7 @@ impl Component for Model {
     fn view(&self) -> Html {
         html! {
             <div>
-                <input type="text" inputmode="decimal" value=&self.expr oninput=self.link.callback(|e: InputData| Msg::GotInput(e.value))/>
+                <input type="text" inputmode="decimal" id="expr" value=&self.expr oninput=self.link.callback(|e: InputData| Msg::GotInput(e.value))/>
                 <p>{self.calc()}</p>
             </div>
         }
