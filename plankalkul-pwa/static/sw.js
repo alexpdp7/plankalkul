@@ -1,4 +1,4 @@
-var cacheName = 'yew-pwa';
+var cacheName = 'plankalkul';
 var filesToCache = [
   './',
   './index.html',
