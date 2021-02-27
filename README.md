@@ -28,7 +28,7 @@ $ docker run -it --rm -v $(pwd):/app -w /app alexpdp7/rust-wasm-pack-rollup ./bu
 
 ### Testing
 
-This will not work as a PWA, just as a plain PWA, because PWAs must be served with https.
+This will not work as a PWA, just as a plain webapp, because PWAs must be served with https.
 
 ```
 $ python3 -m http.server --directory target/pwa/
