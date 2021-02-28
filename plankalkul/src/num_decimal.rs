@@ -25,16 +25,17 @@ fn fract_to_decimal_and_periodic(mut f: BigRational) -> (String, String) {
     let mut seen = HashMap::new();
     loop {
         f = f * BigInt::from(10);
+
+        if seen.contains_key(&f) {
+            let pos = *seen.get(&f).unwrap();
+            let (d, p) = decimal.split_at(pos - 1);
+            return (d.to_string(), p.to_string());
+        }
+
         let (div, rem) = f.numer().div_rem(f.denom());
         decimal = format!("{}{}", decimal, div);
         if rem == BigInt::from(0) {
             return (decimal, "".to_string());
-        }
-
-        if seen.contains_key(&f) {
-            let pos = *seen.get(&f).unwrap();
-            let (d, p) = decimal.split_at(pos);
-            return (d.to_string(), p.to_string());
         }
 
         seen.insert(f.clone(), decimal.len());
@@ -66,6 +67,7 @@ fn test_to_decimal() {
     assert_eq!("-23.0||", dec("-23"));
     assert_eq!("23.45||", dec("2345/100"));
     assert_eq!("-23.45||", dec("-2345/100"));
-    assert_eq!("0.234|54|", dec("2322/9900"));
+    assert_eq!("0.23|45|", dec("2322/9900"));
     assert_eq!("0.125||", dec("1/8"));
+    assert_eq!("0.|3|", dec("1/3"));
 }
