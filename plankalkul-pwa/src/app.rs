@@ -1,5 +1,8 @@
+use std::error::Error;
+
 use yew::{html, Component, ComponentLink, Html, InputData, ShouldRender};
 
+use plankalkul::expr::Expr;
 use plankalkul::expr_parse::expr;
 
 pub struct Model {
@@ -12,12 +15,12 @@ pub enum Msg {
 }
 
 impl Model {
-    fn calc(&self) -> String {
-        let result = expr(self.expr.as_str());
-        match result {
-            Ok((_, expr)) => expr.as_number().to_decimal_periodic(),
-            Err(_) => "???".to_string(),
+    fn calc(&self) -> Result<Expr, Box<dyn Error + '_>> {
+        let (rest, expr) = expr(&self.expr)?;
+        if !rest.is_empty() {
+            return Err(format!("unparsed {}", rest).into());
         }
+        Ok(expr)
     }
 }
 
@@ -27,7 +30,7 @@ impl Component for Model {
 
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         Model {
-            link: link,
+            link,
             expr: "2+2".to_string(),
         }
     }
@@ -46,10 +49,22 @@ impl Component for Model {
     }
 
     fn view(&self) -> Html {
+        let expr = self.calc();
+        let content = match expr {
+            Ok(expr) => html! {
+                <p>
+                    {format!("{} = {} = {:?}", expr, expr.as_number(), expr.as_number().to_decimal())}
+                </p>
+            },
+            Err(err) => html! {
+                <p>{err}</p>
+            },
+        };
+
         html! {
             <div>
                 <input type="text" inputmode="decimal" id="expr" value=&self.expr oninput=self.link.callback(|e: InputData| Msg::GotInput(e.value))/>
-                <p>{self.calc()}</p>
+                {content}
             </div>
         }
     }

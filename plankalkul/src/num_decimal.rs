@@ -24,7 +24,7 @@ fn fract_to_decimal_and_periodic(mut f: BigRational) -> (String, String) {
     let mut decimal = "".to_string();
     let mut seen = HashMap::new();
     loop {
-        f = f * BigInt::from(10);
+        f *= BigInt::from(10);
 
         if seen.contains_key(&f) {
             let pos = *seen.get(&f).unwrap();
