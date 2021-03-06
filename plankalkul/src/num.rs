@@ -24,8 +24,8 @@ pub fn build_number(integer: &str, decimal: &str) -> Number {
 }
 
 impl Number {
-    pub fn to_decimal(&self) -> Decimal {
-        to_decimal(self.number.clone())
+    pub fn to_decimal(&self, max_decimals: usize) -> Decimal {
+        to_decimal(self.number.clone(), max_decimals)
     }
 }
 

@@ -53,7 +53,7 @@ impl Component for Model {
         let content = match expr {
             Ok(expr) => html! {
                 <p>
-                    {format!("{} = {} = {:?}", expr, expr.as_number(), expr.as_number().to_decimal())}
+                    {format!("{} = {} = {:?}", expr, expr.as_number(), expr.as_number().to_decimal(100))}
                 </p>
             },
             Err(err) => html! {

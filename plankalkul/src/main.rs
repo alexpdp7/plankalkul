@@ -10,6 +10,6 @@ fn main() {
         arg,
         expr,
         expr.as_number(),
-        expr.as_number().to_decimal()
+        expr.as_number().to_decimal(100)
     );
 }
