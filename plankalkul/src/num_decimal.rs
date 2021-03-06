@@ -57,10 +57,20 @@ impl std::fmt::Debug for Decimal {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
-            "{}.{}|{}|{}",
+            "{}.{}{}{}{}{}",
             self.integer,
             self.decimal,
+            if !self.decimal_periodic.is_empty() {
+                "|"
+            } else {
+                ""
+            },
             self.decimal_periodic,
+            if !self.decimal_periodic.is_empty() {
+                "|"
+            } else {
+                ""
+            },
             if self.complete { "" } else { "..." },
         )
     }
@@ -74,13 +84,13 @@ fn test_to_decimal() {
     fn dec(s: &str) -> String {
         format!("{:?}", to_decimal(BigRational::from_str(s).unwrap(), 100))
     }
-    assert_eq!("0.45||", dec("45/100"));
-    assert_eq!("23.0||", dec("23"));
-    assert_eq!("-23.0||", dec("-23"));
-    assert_eq!("23.45||", dec("2345/100"));
-    assert_eq!("-23.45||", dec("-2345/100"));
+    assert_eq!("0.45", dec("45/100"));
+    assert_eq!("23.0", dec("23"));
+    assert_eq!("-23.0", dec("-23"));
+    assert_eq!("23.45", dec("2345/100"));
+    assert_eq!("-23.45", dec("-2345/100"));
     assert_eq!("0.23|45|", dec("2322/9900"));
-    assert_eq!("0.125||", dec("1/8"));
+    assert_eq!("0.125", dec("1/8"));
     assert_eq!("0.|3|", dec("1/3"));
-    assert_eq!("0.0000000004690085841454564425004666060876731713418737579658979890655216750096407176766165335402294038||...", dec("1/2132157137"))
+    assert_eq!("0.0000000004690085841454564425004666060876731713418737579658979890655216750096407176766165335402294038...", dec("1/2132157137"))
 }
