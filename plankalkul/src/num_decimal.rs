@@ -31,7 +31,7 @@ fn fract_to_decimal_and_periodic(
     let mut seen = HashMap::new();
     loop {
         if decimal.len() == max_decimals {
-            return (decimal.to_string(), "".to_string(), false);
+            return (decimal, "".to_string(), false);
         }
         f *= BigInt::from(10);
 
