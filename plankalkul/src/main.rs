@@ -9,7 +9,7 @@ fn main() {
         "{} -> {} , {} , {:?}",
         arg,
         expr,
-        expr.as_number(),
-        expr.as_number().to_decimal(100)
+        expr.as_number().unwrap(),
+        expr.as_number().unwrap().to_decimal(100)
     );
 }

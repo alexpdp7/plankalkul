@@ -1,9 +1,8 @@
-use std::error::Error;
-
 use yew::{html, Component, ComponentLink, Html, InputData, ShouldRender};
 
 use plankalkul::expr::Expr;
 use plankalkul::expr_parse::expr;
+use plankalkul::num::Number;
 
 pub struct Model {
     link: ComponentLink<Self>,
@@ -53,24 +52,27 @@ impl Component for Model {
 }
 
 impl Model {
-    fn calc(e: &str) -> Result<Expr, Box<dyn Error + '_>> {
-        let (rest, expr) = expr(e)?;
+    fn calc(e: &str) -> Result<(Expr, Number), String> {
+        let (rest, expr) = expr(e).map_err(|e| format!("parsing error {}", e))?;
         if !rest.is_empty() {
-            return Err(format!("unparsed {}", rest).into());
+            return Err(format!("unparsed {}", rest));
         }
-        Ok(expr)
+        let num = expr.as_number();
+        match num {
+            Ok(num) => Ok((expr, num)),
+            Err(e) => Err(e),
+        }
     }
 
     fn view_expr(&self, (i, expr): (usize, &String)) -> Html {
-        let value = Model::calc(expr);
-        let content = match value {
-            Ok(value) => html! {
+        let content = match Model::calc(expr) {
+            Ok((expr, number)) => html! {
                 <p>
-                    {format!("{} = {} = {:?}", value, value.as_number(), value.as_number().to_decimal(100))}
+                    {format!("{} = {} = {:?}", expr, number, number.to_decimal(100))}
                 </p>
             },
             Err(err) => html! {
-                <p>{format!("{:?}", err)}</p>
+                <p>{format!("{}", err)}</p>
             },
         };
 
