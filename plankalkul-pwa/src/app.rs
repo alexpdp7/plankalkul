@@ -53,6 +53,9 @@ impl Component for Model {
 
 impl Model {
     fn calc(e: &str) -> Result<(Expr, Number), String> {
+        if e.is_empty() {
+            return Err("".to_string());
+        }
         let (rest, expr) = expr(e).map_err(|e| format!("parsing error {}", e))?;
         if !rest.is_empty() {
             return Err(format!("unparsed {}", rest));
