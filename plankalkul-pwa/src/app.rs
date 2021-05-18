@@ -75,13 +75,13 @@ impl Model {
                 </p>
             },
             Err(err) => html! {
-                <p>{format!("{}", err)}</p>
+                <p>{err}</p>
             },
         };
 
         html! {
             <div>
-                <input type="text" inputmode="decimal" value=expr oninput=self.link.callback(move |e: InputData| Msg::GotInput(i, e.value))/>
+                <input type="text" inputmode="decimal" value=expr.to_string() oninput=self.link.callback(move |e: InputData| Msg::GotInput(i, e.value))/>
                 {content}
             </div>
         }
