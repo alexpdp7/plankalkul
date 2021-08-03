@@ -15,9 +15,7 @@ pub fn build_number(integer: &str, decimal: &str) -> Number {
             "{}{}/1{}",
             integer,
             decimal,
-            std::iter::repeat("0")
-                .take(decimal.len())
-                .collect::<String>()
+            "0".repeat(decimal.len())
         ))
         .unwrap(),
     }
