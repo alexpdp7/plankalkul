@@ -52,7 +52,7 @@ impl Component for Model {
 }
 
 impl Model {
-    fn calc(e: &str) -> Result<(Expr, Number), String> {
+    fn calc(e: &str) -> Result<(Box<Expr>, Number), String> {
         if e.is_empty() {
             return Err("".to_string());
         }
