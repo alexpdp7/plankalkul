@@ -11,16 +11,15 @@ use crate::num_parse::number;
 
 pub fn expr(input: &str) -> IResult<&str, Box<Expr>> {
     let (input, op1) = expr1(input)?;
-    let mut folder = fold_many0(
+    fold_many0(
         expr_second_arm,
-        || op1.clone(),
+        move || op1.clone(),
         |e1, (op, op2)| match op {
             '+' => Box::new(Expr::Add { op1: e1, op2 }),
             '-' => Box::new(Expr::Sub { op1: e1, op2 }),
             _ => panic!(),
         },
-    );
-    folder(input)
+    )(input)
 }
 
 fn expr_second_arm(input: &str) -> IResult<&str, (char, Box<Expr>)> {
@@ -31,17 +30,15 @@ fn expr_second_arm(input: &str) -> IResult<&str, (char, Box<Expr>)> {
 
 fn expr1(input: &str) -> IResult<&str, Box<Expr>> {
     let (input, op1) = expr2(input)?;
-    let mut folder = fold_many0(
+    fold_many0(
         expr1_second_arm,
-        || op1.clone(),
+        move || op1.clone(),
         |e1, (op, op2)| match op {
             '*' => Box::new(Expr::Mul { op1: e1, op2 }),
             '/' => Box::new(Expr::Div { op1: e1, op2 }),
             _ => panic!(),
         },
-    );
-
-    folder(input)
+    )(input)
 }
 
 fn expr1_second_arm(input: &str) -> IResult<&str, (char, Box<Expr>)> {
