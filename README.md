@@ -1,3 +1,8 @@
+# DEPRECATED
+
+I used this because I used a BlackBerry, and Android calculator apps did not take advantage of the physical keyboard.
+However, I no longer use a BlackBerry, so I no longer maintain this.
+
 # Introduction
 
 This repository contains Plankalkul.
