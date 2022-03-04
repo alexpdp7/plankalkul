@@ -1,8 +1,3 @@
-# DEPRECATED
-
-I used this because I used a BlackBerry, and Android calculator apps did not take advantage of the physical keyboard.
-However, I no longer use a BlackBerry, so I no longer maintain this.
-
 # Introduction
 
 This repository contains Plankalkul.
@@ -14,6 +9,8 @@ Plankalkul consists of:
 The additional `plankalkul-pwa` contains a PWA implemented using Yew.
 
 `plankalkul-pwa` has a public deployment at https://alexpdp7.github.io/plankalkul/
+
+I find this application works better than many built-in calculator apps on phones with physical keyboards such as the Titan Pocket or BlackBerry KeyONE.
 
 ## Hacking the PWA
 
