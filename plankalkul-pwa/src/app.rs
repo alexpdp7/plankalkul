@@ -1,11 +1,11 @@
-use yew::{html, Component, ComponentLink, Html, InputData, ShouldRender};
+use web_sys::InputEvent;
+use yew::{html, Component, Context, Html};
 
 use plankalkul::expr::Expr;
 use plankalkul::expr_parse::expr;
 use plankalkul::num::Number;
 
 pub struct Model {
-    link: ComponentLink<Self>,
     exprs: Vec<String>,
 }
 
@@ -18,18 +18,17 @@ impl Component for Model {
     type Message = Msg;
     type Properties = ();
 
-    fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
+    fn create(_ctx: &Context<Self>) -> Self {
         Model {
-            link,
             exprs: vec!["2+2".to_string()],
         }
     }
 
-    fn change(&mut self, _: Self::Properties) -> bool {
-        false
-    }
+    //    fn changed(&mut self, _: Self::Properties) -> bool {
+    //        false
+    //    }
 
-    fn update(&mut self, msg: Self::Message) -> ShouldRender {
+    fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
             Msg::GotInput(i, new_value) => {
                 self.exprs[i] = new_value;
@@ -41,11 +40,11 @@ impl Component for Model {
         true
     }
 
-    fn view(&self) -> Html {
+    fn view(&self, ctx: &Context<Self>) -> Html {
         html! {
             <>
-                { for self.exprs.iter().enumerate().map(|expr| self.view_expr(expr)) }
-                <button onclick=self.link.callback(|_| Msg::Add())>{"+"}</button>
+                { for self.exprs.iter().enumerate().map(|expr| self.view_expr(expr, ctx)) }
+                <button onclick={ctx.link().callback(|_| Msg::Add())}>{"+"}</button>
             </>
         }
     }
@@ -67,7 +66,7 @@ impl Model {
         }
     }
 
-    fn view_expr(&self, (i, expr): (usize, &String)) -> Html {
+    fn view_expr(&self, (i, expr): (usize, &String), ctx: &Context<Self>) -> Html {
         let content = match Model::calc(expr) {
             Ok((expr, number)) => html! {
                 <p>
@@ -81,7 +80,7 @@ impl Model {
 
         html! {
             <div>
-                <input type="text" inputmode="decimal" value=expr.to_string() oninput=self.link.callback(move |e: InputData| Msg::GotInput(i, e.value))/>
+                <input type="text" inputmode="decimal" value={expr.to_string()} oninput={ctx.link().callback(move |e: InputEvent| Msg::GotInput(i, e.data().unwrap()))}/>
                 {content}
             </div>
         }

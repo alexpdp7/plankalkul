@@ -29,11 +29,11 @@ impl std::fmt::Display for Expr {
                 f,
                 "{}*{}",
                 match **op1 {
-                    Expr::Add { .. } | Expr::Sub { .. } => format!("({})", op1.to_string()),
+                    Expr::Add { .. } | Expr::Sub { .. } => format!("({})", op1),
                     _ => op1.to_string(),
                 },
                 match **op2 {
-                    Expr::Add { .. } | Expr::Sub { .. } => format!("({})", op2.to_string()),
+                    Expr::Add { .. } | Expr::Sub { .. } => format!("({})", op2),
                     _ => op2.to_string(),
                 },
             ),
@@ -41,12 +41,12 @@ impl std::fmt::Display for Expr {
                 f,
                 "{}/{}",
                 match **op1 {
-                    Expr::Add { .. } | Expr::Sub { .. } => format!("({})", op1.to_string()),
+                    Expr::Add { .. } | Expr::Sub { .. } => format!("({})", op1),
                     _ => op1.to_string(),
                 },
                 match **op2 {
                     Expr::Number { .. } => op2.to_string(),
-                    _ => format!("({})", op2.to_string()),
+                    _ => format!("({})", op2),
                 },
             ),
         }
