@@ -4,7 +4,7 @@ use num::rational::BigRational;
 
 use crate::num_decimal::{to_decimal, Decimal};
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Number {
     number: BigRational,
 }
