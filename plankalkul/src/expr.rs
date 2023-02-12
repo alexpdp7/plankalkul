@@ -13,15 +13,15 @@ pub enum Expr {
 impl std::fmt::Display for Expr {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Expr::Number { number } => write!(f, "{}", number),
-            Expr::Negate { op } => write!(f, "-({})", op),
-            Expr::Add { op1, op2 } => write!(f, "{}+{}", op1, op2),
+            Expr::Number { number } => write!(f, "{number}"),
+            Expr::Negate { op } => write!(f, "-({op})"),
+            Expr::Add { op1, op2 } => write!(f, "{op1}+{op2}"),
             Expr::Sub { op1, op2 } => write!(
                 f,
                 "{}-{}",
                 op1,
                 match **op2 {
-                    Expr::Add { .. } => format!("({})", op2),
+                    Expr::Add { .. } => format!("({op2})"),
                     _ => op2.to_string(),
                 }
             ),
@@ -29,11 +29,11 @@ impl std::fmt::Display for Expr {
                 f,
                 "{}*{}",
                 match **op1 {
-                    Expr::Add { .. } | Expr::Sub { .. } => format!("({})", op1),
+                    Expr::Add { .. } | Expr::Sub { .. } => format!("({op1})"),
                     _ => op1.to_string(),
                 },
                 match **op2 {
-                    Expr::Add { .. } | Expr::Sub { .. } => format!("({})", op2),
+                    Expr::Add { .. } | Expr::Sub { .. } => format!("({op2})"),
                     _ => op2.to_string(),
                 },
             ),
@@ -41,12 +41,12 @@ impl std::fmt::Display for Expr {
                 f,
                 "{}/{}",
                 match **op1 {
-                    Expr::Add { .. } | Expr::Sub { .. } => format!("({})", op1),
+                    Expr::Add { .. } | Expr::Sub { .. } => format!("({op1})"),
                     _ => op1.to_string(),
                 },
                 match **op2 {
                     Expr::Number { .. } => op2.to_string(),
-                    _ => format!("({})", op2),
+                    _ => format!("({op2})"),
                 },
             ),
         }

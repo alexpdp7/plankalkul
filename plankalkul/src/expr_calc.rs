@@ -7,7 +7,7 @@ impl expr::Expr {
             expr::Expr::Number { number } => Ok(number.clone()),
             expr::Expr::Negate { op } => match op.as_number() {
                 Ok(op) => Ok(-op),
-                Err(s) => Err(format!("Cannot negate {}: {}", op, s)),
+                Err(s) => Err(format!("Cannot negate {op}: {s}")),
             },
             expr::Expr::Add { op1, op2 } => match (op1.as_number(), op2.as_number()) {
                 (Ok(op1), Ok(op2)) => Ok(op1 + op2),
@@ -24,7 +24,7 @@ impl expr::Expr {
             expr::Expr::Div { op1, op2 } => match (op1.as_number(), op2.as_number()) {
                 (Ok(op1), Ok(op2)) => {
                     if op2 == num::build_number("0", "0") {
-                        Err(format!("division by zero in {}", self))
+                        Err(format!("division by zero in {self}"))
                     } else {
                         Ok(op1 / op2)
                     }
@@ -46,8 +46,8 @@ fn show_error_binary_expr(expr: &expr::Expr, op1: &expr::Expr, op2: &expr::Expr)
 
 fn show_error_expr(op: &expr::Expr) -> String {
     match op.as_number() {
-        Ok(op) => format!("{}", op),
-        Err(err) => format!("({})", err),
+        Ok(op) => format!("{op}"),
+        Err(err) => format!("({err})"),
     }
 }
 

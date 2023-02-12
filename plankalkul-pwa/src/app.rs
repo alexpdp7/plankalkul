@@ -56,9 +56,9 @@ impl Model {
         if e.is_empty() {
             return Err("".to_string());
         }
-        let (rest, expr) = expr(e).map_err(|e| format!("parsing error {}", e))?;
+        let (rest, expr) = expr(e).map_err(|e| format!("parsing error {e}"))?;
         if !rest.is_empty() {
-            return Err(format!("unparsed {}", rest));
+            return Err(format!("unparsed {rest}"));
         }
         let num = expr.as_number();
         match num {

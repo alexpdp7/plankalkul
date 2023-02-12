@@ -42,7 +42,7 @@ fn fract_to_decimal_and_periodic(
         }
 
         let (div, rem) = f.numer().div_rem(f.denom());
-        decimal = format!("{}{}", decimal, div);
+        decimal = format!("{decimal}{div}");
         if rem == BigInt::from(0) {
             return (decimal, "".to_string(), true);
         }
