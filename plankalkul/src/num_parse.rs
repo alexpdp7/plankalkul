@@ -12,7 +12,7 @@ pub fn number(input: &str) -> IResult<&str, Number> {
     let (input, integer) = digit1(input)?;
     let (input, decimal) = opt(decimal_part)(input)?;
     let integer = match sign.is_some() {
-        true => format!("-{}", integer),
+        true => format!("-{integer}"),
         false => integer.to_string(),
     };
     match decimal {
