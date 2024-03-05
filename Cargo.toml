@@ -4,3 +4,5 @@ members = [
     "plankalkul",
     "plankalkul-pwa",
 ]
+
+resolver = "2"
