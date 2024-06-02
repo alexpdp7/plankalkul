@@ -1,0 +1,17 @@
+{
+  "name": "plankalkul-pwa",
+  "collaborators": [
+    "alex <alex@pdp7.net>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "plankalkul_pwa_bg.wasm",
+    "plankalkul_pwa.js",
+    "plankalkul_pwa.d.ts"
+  ],
+  "module": "plankalkul_pwa.js",
+  "types": "plankalkul_pwa.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
