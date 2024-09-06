@@ -9,6 +9,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wasm-bindgen = "^0.2"
-web-sys = { version = "^0.3.69", features = ["Event","EventTarget","InputEvent"] }
+web-sys = { version = "^0.3.70", features = ["Event","EventTarget","InputEvent"] }
 yew = { version = "^0.21", features = ["csr"] }
 plankalkul = { path = "../plankalkul" }
