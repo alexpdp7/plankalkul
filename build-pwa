@@ -1,8 +1,0 @@
-#!/bin/sh
-
-set -ue
-
-mkdir -p target/pwa/pkg
-wasm-pack build --target web plankalkul-pwa -d ../target/pwa/pkg
-cp plankalkul-pwa/static/* target/pwa/
-rollup target/pwa/main.js --format iife --file target/pwa/pkg/bundle.js
