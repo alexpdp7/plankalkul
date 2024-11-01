@@ -22,10 +22,10 @@ The script `build-pwa` builds the PWA to `target/pwa/`.
 
 It requires Rust, wasm-pack, rollup.
 
-To build using a pre-built Docker image with build dependencies:
+To build using a pre-built container image with build dependencies:
 
 ```
-$ docker run -it --rm -v $(pwd):/app -w /app alexpdp7/rust-wasm-pack-rollup ./build-pwa
+$ podman run --security-opt label=disable -it --rm -v $(pwd):/app -w /app docker.io/alexpdp7/rust-wasm-pack-rollup ./build-pwa
 ```
 
 ### Testing
