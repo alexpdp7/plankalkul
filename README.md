@@ -1,5 +1,8 @@
 # Introduction
 
+ARCHIVED: I no longer use this and updating was a pain.
+Feel free to fork and update, or contact me.
+
 This repository contains Plankalkul.
 Plankalkul consists of:
 
